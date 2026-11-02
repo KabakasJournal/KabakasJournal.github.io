@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inkwell Journal</title>
+<meta name="description" content="A personal blog about writing, code and creative work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a href="#home" class="brand" id="brand"></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn" id="searchToggle" aria-label="Search">&#128269;</button>
+      <button class="icon-btn" id="themeToggle" aria-label="Switch light or dark mode">&#9680;</button>
+      <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </div>
+  <div class="wrap search-row" id="searchRow" hidden>
+    <input type="search" id="searchInput" placeholder="Search posts, topics or tags" aria-label="Search posts">
+  </div>
+</header>
+
+<main id="app" class="wrap" tabindex="-1"></main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div>
+      <strong id="footBrand"></strong>
+      <p id="footTag"></p>
+    </div>
+    <div class="socials" id="socials"></div>
+  </div>
+  <p class="copy" id="copy"></p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/config.js"></script>
+<script src="js/posts.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
