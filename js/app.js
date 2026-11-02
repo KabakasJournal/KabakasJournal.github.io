@@ -9,8 +9,16 @@
   const fmtDate = d => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const grad = c => `linear-gradient(135deg, ${c.a}, ${c.b})`;
-  const cats = () => [...new Set(POSTS.map(p => p.category))];
+  const cats = () => [...new Set(POSTS.map(p => p.category))].sort((a, b) => a.localeCompare(b));
   const sorted = () => [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  const categoryImages = {
+    Nursing: "images/nursing.jpg", Code: "images/technology.jpg",
+    Tools: "images/technology.jpg", Writing: "images/writing.jpg",
+    Life: "images/lifestyle.jpg", Research: "images/research.jpg",
+    Education: "images/education.jpg"
+  };
+  const imageFor = p => p.image || categoryImages[p.category] || "images/hero-health.jpg";
+  const allTags = () => [...new Set(POSTS.flatMap(p => p.tags || []))].sort((a,b) => a.localeCompare(b));
 
   function toast(msg) {
     const t = $("#toast"); t.textContent = msg; t.classList.add("show");
@@ -28,17 +36,24 @@
   }
 
   function topics() {
-    return `<section class="topics" aria-label="Topics">${cats().map(c => {
-      const ps = POSTS.filter(p => p.category === c), cv = ps[0].cover;
-      return `<a class="topic" href="#cat-${slugify(c)}" style="background:${grad(cv)}"><span class="sym">${esc(cv.symbol)}</span><strong>${esc(c)}</strong><small>${ps.length} post${ps.length > 1 ? "s" : ""}</small></a>`;
-    }).join("")}</section>`;
+    const categoryTiles = cats().map(c => {
+      const ps = sorted().filter(p => p.category === c);
+      return `<a class="topic" href="#cat-${slugify(c)}" style="--topic-image:url('${esc(categoryImages[c] || "images/hero-health.jpg")}')">
+        <strong>${esc(c)}</strong><small>${ps.length} article${ps.length === 1 ? "" : "s"}</small></a>`;
+    }).join("");
+    const popular = allTags().slice(0, 12).map(t => `<a class="topic-tag" href="#tag-${slugify(t)}">#${esc(t)}</a>`).join("");
+    return `<section class="discovery">
+      <div class="section-kicker">Explore the journal</div>
+      <div class="topics" aria-label="Browse categories">${categoryTiles}</div>
+      <div class="topic-cloud"><strong>Explore topics</strong>${popular}</div>
+    </section>`;
   }
 
   function card(p) {
     return `<a class="card" href="#${p.slug}">
-      <div class="cover" style="background:${grad(p.cover)}">${esc(p.cover.symbol)}</div>
+      <div class="cover"><img src="${esc(imageFor(p))}" alt="${esc(p.category)} article photograph" loading="lazy"></div>
       <div class="body">
-        <span class="cat"><i style="background:${p.cover.b}"></i>${esc(p.category)}</span>
+        <span class="cat"><i></i>${esc(p.category)}</span>
         <h3>${esc(p.title)}</h3>
         <p>${esc(p.excerpt)}</p>
         <span class="foot">${fmtDate(p.date)} &middot; ${p.readTime} min read</span>
@@ -65,14 +80,13 @@
     const slice = rest.slice(0, shown);
     let html = "";
     if (first) {
-      html += `<section class="hero" data-symbol="${esc(first.cover.symbol)}" style="--hero-bg:${grad(first.cover)}">
-        <div class="meta"><span class="chip">Featured</span><span>${esc(first.category)}</span><span>${fmtDate(first.date)}</span></div>
-        <h1>${esc(first.title)}</h1>
-        <p>${esc(first.excerpt)}</p>
-        <a class="btn" href="#${first.slug}">Read the post</a></section>`;
+      html += `<section class="hero" style="--hero-image:url('${esc(imageFor(first))}')">
+        <div class="hero-copy"><div class="meta"><span class="chip">Featured article</span><span>${esc(first.category)}</span><span>${fmtDate(first.date)}</span></div>
+        <h1>${esc(first.title)}</h1><p>${esc(first.excerpt)}</p>
+        <a class="btn" href="#${first.slug}">Read the article <span aria-hidden="true">→</span></a></div></section>`;
     }
     if (withHero) html += topics();
-    html += `<div class="section-head"><h2>${esc(title)}</h2>${filters(active)}</div>`;
+    html += `<div class="section-head"><div><span class="section-kicker">Fresh perspectives</span><h2>${esc(title)}</h2></div>${filters(active)}</div>`;
     html += slice.length ? `<div class="grid">${slice.map(card).join("")}</div>` : `<div class="empty">No posts found. Try a different word or category.</div>`;
     if (rest.length > shown) html += `<div class="more"><button class="btn ghost" id="moreBtn">Load more posts</button></div>`;
     html += newsletter();
@@ -88,7 +102,7 @@
       <div class="crumbs"><a href="#home">Home</a> / <a href="#cat-${slugify(p.category)}">${esc(p.category)}</a></div>
       <h1>${esc(p.title)}</h1>
       <div class="byline"><span>By ${esc(CONFIG.author)}</span><span>${fmtDate(p.date)}</span><span>${p.readTime} min read</span></div>
-      <div class="article-cover" style="background:${grad(p.cover)}">${esc(p.cover.symbol)}</div>
+      <figure class="article-cover"><img src="${esc(imageFor(p))}" alt="${esc(p.category)} article photograph"></figure>
       <div class="prose">${p.content}</div>
       <div class="tags">${p.tags.map(t => `<a href="#tag-${slugify(t)}">#${esc(t)}</a>`).join("")}</div>
       <div class="share"><span>Share:</span>

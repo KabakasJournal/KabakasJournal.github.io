@@ -8,6 +8,7 @@ Change every value. The slug must be new and unique (letters, numbers, dashes).
     tags: ["tag-one", "tag-two"],
     date: "2026-11-05",
     readTime: 4,
+    image: "images/writing.jpg", // Optional: use a relevant image in the images folder
     cover: { a: "#14213D", b: "#3B5BDB", symbol: "★" },
     excerpt: "One or two sentences that make people want to read.",
     content: `

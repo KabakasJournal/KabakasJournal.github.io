@@ -91,3 +91,32 @@ Open NEW-POST-TEMPLATE.txt, copy the block into js/posts.js, change the words, s
 
 PUBLISH CHANGES (VS Code + GitHub)
 After setup: edit > Source Control icon > type a message > Commit > Sync Changes.
+
+
+VISUAL UPDATE
+The site now uses local photographs in the images folder. Keep these image files
+when moving or publishing the website:
+- hero-health.jpg
+- nursing.jpg
+- technology.jpg
+- writing.jpg
+- research.jpg
+- education.jpg
+- lifestyle.jpg
+
+ARTICLE ORGANISATION
+Articles are automatically sorted newest first. Category tiles are generated
+from the categories used in js/posts.js. Topic links are generated from post
+tags. To publish a new article, add a post object to js/posts.js and set its
+category, date, tags, excerpt and content. The site will update its category,
+topic and date listings automatically.
+
+OPTIONAL ARTICLE IMAGE
+To give one article its own photograph, add an image field to that post:
+image: "images/my-photo.jpg",
+Then place my-photo.jpg inside the images folder. If no image field is set,
+the site uses the photograph assigned to that article's category.
+
+PUBLISH
+After replacing the files, open the project folder in VS Code, test index.html
+with Live Server, then commit and push your changes to GitHub.
