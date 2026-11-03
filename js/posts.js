@@ -8,6 +8,7 @@
 const POSTS = [
  {
   slug: "plain-words-for-patients",
+  image: "images/nursing/patient-communication-health-literacy.jpg",
   title: "Patient Communication in Nursing: Health Literacy, Therapeutic Communication, and the Teach-Back Method",
   category: "Nursing",
   tags: ["nursing", "therapeutic-communication", "health-literacy", "patient-safety", "patient-education", "clinical-practice"],
@@ -194,6 +195,7 @@ const POSTS = [
 
  {
     slug: "beyond-memorisation-nursing-council-exams",
+  image: "images/nursing/nursing-council-exam-preparation.jpg",
     title:
       "Beyond Memorisation: How to Prepare for Nursing Council Examinations",
     category: "Nursing",
@@ -259,6 +261,7 @@ const POSTS = [
 
   {
     slug: "write-the-ugly-first-draft",
+  image: "images/writing/the-ugly-first-draft.jpg",
     title: "Write the ugly first draft",
     category: "Writing",
     tags: ["fiction", "habits", "drafting"],
@@ -282,8 +285,9 @@ const POSTS = [
   },
   {
     slug: "my-first-flutter-app-lessons",
+  image: "images/technology/my-first-flutter-app.jpg",
     title: "What my first Flutter app taught me",
-    category: "Code",
+    category: "Technology",
     tags: ["flutter", "dart", "apps"],
     date: "2026-10-22",
     readTime: 6,
@@ -303,8 +307,9 @@ const POSTS = [
   },
   {
     slug: "free-ai-tools-for-web-building",
+  image: "images/technology/free-ai-tools-for-web-building.jpg",
     title: "Building websites with free AI tools",
-    category: "Tools",
+    category: "Technology",
     tags: ["ai", "vscode", "ollama"],
     date: "2026-10-15",
     readTime: 5,
@@ -322,8 +327,9 @@ const POSTS = [
   },
   {
     slug: "a-calm-daily-routine-for-creators",
+  image: "images/lifestyle/calm-daily-routine-for-creators.jpg",
     title: "A calm daily routine for creators",
-    category: "Life",
+    category: "Lifestyle",
     tags: ["habits", "focus"],
     date: "2026-10-08",
     readTime: 3,
@@ -337,8 +343,9 @@ const POSTS = [
   },
   {
     slug: "css-tricks-i-use-every-week",
+  image: "images/technology/css-tricks-i-use-every-week.jpg",
     title: "CSS tricks I use every week",
-    category: "Code",
+    category: "Technology",
     tags: ["css", "html", "design"],
     date: "2026-09-30",
     readTime: 5,
@@ -359,6 +366,7 @@ const POSTS = [
   },
   {
     slug: "how-to-build-a-story-world",
+  image: "images/writing/how-to-build-a-story-world.jpg",
     title: "How to build a story world without drowning in notes",
     category: "Writing",
     tags: ["fiction", "worldbuilding"],
@@ -378,8 +386,9 @@ const POSTS = [
   },
   {
     slug: "why-i-started-this-blog",
+  image: "images/lifestyle/why-i-started-this-blog.jpg",
     title: "Why I started this blog",
-    category: "Life",
+    category: "Lifestyle",
     tags: ["introduction"],
     date: "2026-09-01",
     readTime: 2,

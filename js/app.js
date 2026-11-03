@@ -9,15 +9,34 @@
   const fmtDate = d => new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const grad = c => `linear-gradient(135deg, ${c.a}, ${c.b})`;
-  const cats = () => [...new Set(POSTS.map(p => p.category))].sort((a, b) => a.localeCompare(b));
+  // Keep the website categories aligned with the folders in images/.
+  // Education and Research are shown as categories even before their first posts.
+  const CATEGORY_ORDER = ["Education", "Lifestyle", "Nursing", "Research", "Technology", "Writing"];
+  const cats = () => CATEGORY_ORDER;
   const sorted = () => [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
   const categoryImages = {
-    Nursing: "images/nursing.jpg", Code: "images/technology.jpg",
-    Tools: "images/technology.jpg", Writing: "images/writing.jpg",
-    Life: "images/lifestyle.jpg", Research: "images/research.jpg",
-    Education: "images/education.jpg"
+    Education: "images/education.jpg",
+    Lifestyle: "images/lifestyle.jpg",
+    Nursing: "images/nursing.jpg",
+    Research: "images/research.jpg",
+    Technology: "images/technology.jpg",
+    Writing: "images/writing.jpg"
   };
-  const imageFor = p => p.image || categoryImages[p.category] || "images/hero-health.jpg";
+  const categoryImageFor = p => categoryImages[p.category] || "images/hero-health.jpg";
+  // Always render a known-good category image first. Article photographs are
+  // optional: when the file exists, upgrade to it; when it does not, the
+  // category photograph remains visible instead of leaving a broken image.
+  const imageAttrs = p => `src="${esc(categoryImageFor(p))}" data-preferred="${esc(p.image || "")}"`;
+
+  function upgradeArticleImages() {
+    document.querySelectorAll("img[data-preferred]").forEach(img => {
+      const preferred = img.dataset.preferred;
+      if (!preferred) return;
+      const probe = new Image();
+      probe.onload = () => { img.src = preferred; };
+      probe.src = preferred;
+    });
+  }
   const allTags = () => [...new Set(POSTS.flatMap(p => p.tags || []))].sort((a,b) => a.localeCompare(b));
 
   function toast(msg) {
@@ -51,7 +70,7 @@
 
   function card(p) {
     return `<a class="card" href="#${p.slug}">
-      <div class="cover"><img src="${esc(imageFor(p))}" alt="${esc(p.category)} article photograph" loading="lazy"></div>
+      <div class="cover"><img ${imageAttrs(p)} alt="${esc(p.category)} article photograph" loading="lazy"></div>
       <div class="body">
         <span class="cat"><i></i>${esc(p.category)}</span>
         <h3>${esc(p.title)}</h3>
@@ -80,21 +99,23 @@
     const slice = rest.slice(0, shown);
     let html = "";
     if (first) {
-      html += `<section class="hero" style="--hero-image:url('${esc(imageFor(first))}')">
+      html += `<section class="hero" style="--hero-image:url('${esc(categoryImageFor(first))}')">
         <div class="hero-copy"><div class="meta"><span class="chip">Featured article</span><span>${esc(first.category)}</span><span>${fmtDate(first.date)}</span></div>
         <h1>${esc(first.title)}</h1><p>${esc(first.excerpt)}</p>
         <a class="btn" href="#${first.slug}">Read the article <span aria-hidden="true">→</span></a></div></section>`;
     }
     if (withHero) html += topics();
     html += `<div class="section-head"><div><span class="section-kicker">Fresh perspectives</span><h2>${esc(title)}</h2></div>${filters(active)}</div>`;
-    html += slice.length ? `<div class="grid">${slice.map(card).join("")}</div>` : `<div class="empty">No posts found. Try a different word or category.</div>`;
+    html += slice.length
+      ? `<div class="grid">${slice.map(card).join("")}</div>`
+      : `<div class="empty">${active !== "all" && active !== "none" ? "Articles in this category are coming soon." : "No posts found. Try a different word or category."}</div>`;
     if (rest.length > shown) html += `<div class="more"><button class="btn ghost" id="moreBtn">Load more posts</button></div>`;
     html += newsletter();
     return html;
   }
 
   function postView(p) {
-    const related = sorted().filter(x => x !== p && (x.category === p.category || x.tags.some(t => p.tags.includes(t)))).slice(0, 3);
+    const related = sorted().filter(x => x !== p && (x.category === p.category || (x.tags || []).some(t => (p.tags || []).includes(t)))).slice(0, 3);
     const url = encodeURIComponent(location.href.split("#")[0] + "#" + p.slug);
     const text = encodeURIComponent(p.title);
     document.title = p.title + " | " + CONFIG.siteName;
@@ -102,9 +123,9 @@
       <div class="crumbs"><a href="#home">Home</a> / <a href="#cat-${slugify(p.category)}">${esc(p.category)}</a></div>
       <h1>${esc(p.title)}</h1>
       <div class="byline"><span>By ${esc(CONFIG.author)}</span><span>${fmtDate(p.date)}</span><span>${p.readTime} min read</span></div>
-      <figure class="article-cover"><img src="${esc(imageFor(p))}" alt="${esc(p.category)} article photograph"></figure>
+      <figure class="article-cover"><img ${imageAttrs(p)} alt="${esc(p.category)} article photograph"></figure>
       <div class="prose">${p.content}</div>
-      <div class="tags">${p.tags.map(t => `<a href="#tag-${slugify(t)}">#${esc(t)}</a>`).join("")}</div>
+      <div class="tags">${(p.tags || []).map(t => `<a href="#tag-${slugify(t)}">#${esc(t)}</a>`).join("")}</div>
       <div class="share"><span>Share:</span>
         <a href="https://wa.me/?text=${text}%20${url}" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank" rel="noopener">X</a>
@@ -159,6 +180,7 @@
     } else html = listView(sorted(), "Latest posts", "all", true);
 
     app.innerHTML = html;
+    upgradeArticleImages();
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + nav));
     $("#nav").classList.remove("open");
     bind();

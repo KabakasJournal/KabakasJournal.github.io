@@ -1,0 +1,37 @@
+WEBSITE CATEGORY AND ARTICLE IMAGE GUIDE
+
+The website now uses the same six category names as the folders inside images/:
+Education, Lifestyle, Nursing, Research, Technology, and Writing.
+
+CATEGORY PHOTOGRAPHS (keep these directly inside images/):
+images/education.jpg
+images/lifestyle.jpg
+images/nursing.jpg
+images/research.jpg
+images/technology.jpg
+images/writing.jpg
+images/hero-health.jpg (general hero fallback)
+
+ARTICLE-SPECIFIC PHOTOGRAPHS
+Add a separate real photograph for each article at the exact path below. Until an article photograph is added, its category photograph will be displayed.
+
+NURSING
+images/nursing/patient-communication-health-literacy.jpg
+images/nursing/nursing-council-exam-preparation.jpg
+
+WRITING
+images/writing/the-ugly-first-draft.jpg
+images/writing/how-to-build-a-story-world.jpg
+
+TECHNOLOGY
+images/technology/my-first-flutter-app.jpg
+images/technology/free-ai-tools-for-web-building.jpg
+images/technology/css-tricks-i-use-every-week.jpg
+
+LIFESTYLE
+images/lifestyle/calm-daily-routine-for-creators.jpg
+images/lifestyle/why-i-started-this-blog.jpg
+
+Education and Research will appear in the website category list now. They will show a coming-soon message until articles are added to those categories.
+
+IMPORTANT: Do not move the six category JPG files into the subfolders. Keep category JPG files directly inside images/. Put article-specific photographs inside the matching category subfolder. Filenames and uppercase/lowercase spelling must match exactly for GitHub Pages.

@@ -120,3 +120,11 @@ the site uses the photograph assigned to that article's category.
 PUBLISH
 After replacing the files, open the project folder in VS Code, test index.html
 with Live Server, then commit and push your changes to GitHub.
+
+
+IMAGE FIX
+The site uses images/ for its category photographs. Keep index.html, css/, js/, and images/ together at the repository root. Do not upload the outer “My Blog” folder as a nested folder inside the repository. Open the folder that directly contains index.html in VS Code. The article-specific image paths and filenames are listed in ARTICLE-IMAGE-GUIDE.txt. Missing article-specific photos automatically fall back to the relevant category photograph.
+
+
+WEBSITE CATEGORIES
+The website categories match the images folders: Education, Lifestyle, Nursing, Research, Technology, and Writing. Code and Tools articles are grouped under Technology; Life articles are grouped under Lifestyle.
