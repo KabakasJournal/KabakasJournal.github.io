@@ -1,4 +1,4 @@
-:root{
+﻿:root{
   --bg:#F2F6F5; --surface:#FFFFFF; --ink:#12201F; --muted:#566867; --line:#D9E3E1;
   --brand:#0E2A2B; --brand-2:#1F6F6B; --accent:#F2B134; --accent-ink:#3A2600;
   --radius:18px; --shadow:0 10px 30px rgba(14,42,43,.10);
@@ -189,3 +189,6 @@ body{font-size:1.08rem;line-height:1.72}
 .site-footer{background:var(--surface);padding:2.5rem 0 1.5rem}
 @media(max-width:760px){.hero{min-height:410px;border-radius:22px;background-position:58% center}.topics{grid-template-columns:repeat(2,minmax(0,1fr))}.topic{min-height:125px}.section-head{align-items:flex-start}.filters{width:100%}.card .cover{height:190px}}
 @media(max-width:420px){.wrap{width:min(100% - 1.5rem,1120px)}.hero{padding:1.5rem;min-height:390px}.hero h1{font-size:2.45rem}.topics{gap:.6rem}.topic{min-height:112px;padding:.8rem}}
+
+
+

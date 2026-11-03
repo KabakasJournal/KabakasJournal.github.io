@@ -1,0 +1,4 @@
+backup-before-repair-*/
+backup-post-cleanup-*/
+project-backups/
+*.backup-*
