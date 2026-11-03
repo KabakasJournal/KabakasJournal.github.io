@@ -1,0 +1,74 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 128 128">
+
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#071727"/>
+      <stop offset="55%" stop-color="#142F49"/>
+      <stop offset="100%" stop-color="#0B1C31"/>
+    </linearGradient>
+
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF0BC"/>
+      <stop offset="45%" stop-color="#D9AE61"/>
+      <stop offset="100%" stop-color="#A87935"/>
+    </linearGradient>
+
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B9F5F3"/>
+      <stop offset="100%" stop-color="#43BFC8"/>
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Premium dark background -->
+  <rect width="128" height="128" rx="29"
+        fill="url(#background)"/>
+
+  <!-- Fine gold outer frame -->
+  <rect x="5" y="5" width="118" height="118" rx="25"
+        fill="none" stroke="url(#gold)"
+        stroke-width="2.2" opacity=".85"/>
+
+  <!-- Inner subtle frame -->
+  <rect x="11" y="11" width="106" height="106" rx="20"
+        fill="none" stroke="#80B8C4"
+        stroke-width=".8" opacity=".25"/>
+
+  <!-- Central monogram -->
+  <text x="64" y="78"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="76"
+        font-weight="bold"
+        fill="url(#gold)">K</text>
+
+  <!-- Open book -->
+  <g fill="none" stroke-linecap="round"
+     stroke-linejoin="round">
+    <path d="M29 91 Q46 84 63 96 Q80 84 99 91"
+          stroke="url(#cyan)" stroke-width="3.5"/>
+    <path d="M29 91 L29 99 Q46 92 63 104 Q80 92 99 99 L99 91"
+          stroke="url(#gold)" stroke-width="2.5"/>
+    <path d="M64 96 L64 104"
+          stroke="#FFF0BC" stroke-width="2"/>
+  </g>
+
+  <!-- Spark of discovery -->
+  <g fill="url(#gold)" filter="url(#glow)">
+    <path d="M94 24 L98 34 L108 38 L98 42 L94 52 L90 42 L80 38 L90 34 Z"/>
+  </g>
+
+  <!-- Small decorative accent -->
+  <circle cx="34" cy="34" r="2" fill="#63D5E8"/>
+  <circle cx="40" cy="27" r="1.3" fill="#E8B85C"/>
+
+</svg>
