@@ -1,4 +1,4 @@
-﻿
+
 /*
   KABAKA'S JOURNAL â€” MAIN WEBSITE ENGINE
 
@@ -296,7 +296,7 @@ import { POSTS } from "./posts/index.js";
 
   function card(post) {
     return `
-      <a class="card" href="#${encodeURIComponent(post.slug)}">
+      <a class="card" href="articles/${encodeURIComponent(post.slug)}/">
 
         <div class="cover">
           <img
@@ -488,7 +488,7 @@ import { POSTS } from "./posts/index.js";
       .slice(0, 3);
 
     const url = encodeURIComponent(
-      location.href.split("#")[0] + "#" + post.slug
+      new URL(`articles/${encodeURIComponent(post.slug)}/`, location.origin + "/My-Blog/").href
     );
 
     const title = encodeURIComponent(post.title);

@@ -1,0 +1,8 @@
+{
+  "name": "kabakas-journal-static-pages",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:articles": "node scripts/generate-articles.mjs"
+  }
+}
