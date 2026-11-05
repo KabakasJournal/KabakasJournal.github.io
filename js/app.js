@@ -27,6 +27,7 @@ import { POSTS } from "./posts/index.js";
     tagline: CONFIG.tagline || "Knowledge Today. A Brighter Tomorrow.",
     author: CONFIG.author || "Ezekbakachukwu Kingsley (Kabaka)",
     authorRole: CONFIG.authorRole || "Writer, Nurse and Technology Enthusiast",
+    authorBio: CONFIG.authorBio || "I’m Kabaka, a registered nurse, writer, educator and app developer. I write about healthcare, education, research, technology and the experience of learning and creating.",
     authorPhoto: CONFIG.authorPhoto || "",
     about: Array.isArray(CONFIG.about) ? CONFIG.about : [],
     social: Array.isArray(CONFIG.social) ? CONFIG.social : [],
@@ -217,21 +218,37 @@ import { POSTS } from "./posts/index.js";
     `;
   }
 
-  function authorCard() {
-    const introduction = SETTINGS.about[0] || "";
+function authorCard() {
+  return `
+    <aside class="author-card">
 
-    return `
-      <aside class="author-card">
+      <div class="author-card-profile">
         ${avatar("sm")}
-        <div>
-          <strong>${esc(SETTINGS.author)}</strong>
-          <span class="role">${esc(SETTINGS.authorRole)}</span>
-          <p>${esc(introduction)}</p>
-          <a href="#about">More about me</a>
-        </div>
-      </aside>
-    `;
-  }
+      </div>
+
+      <div class="author-card-content">
+
+        <span class="section-kicker">About the author</span>
+
+        <h3>${esc(SETTINGS.author)}</h3>
+
+        <p class="role">
+          ${esc(SETTINGS.authorRole)}
+        </p>
+
+        <p class="author-bio">
+          ${esc(SETTINGS.authorBio)}
+        </p>
+
+        <a href="#about" class="author-more">
+          Read my full story &rarr;
+        </a>
+
+      </div>
+
+    </aside>
+  `;
+}
 
   /* =====================================================
      7. CATEGORY AND TOPIC DISCOVERY
