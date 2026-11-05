@@ -116,9 +116,233 @@ a{color:inherit}
 .foot{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;align-items:center}
 .foot strong{font-family:var(--display);font-size:1.1rem}
 .foot p{color:var(--muted);font-size:1rem}
-.socials{display:flex;gap:.6rem;flex-wrap:wrap}
-.socials a{font-family:var(--display);font-size:.85rem;text-decoration:none;padding:.5rem 1rem;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
-.socials a:hover{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* =====================================================
+   SOCIAL LINKS — KABAKA'S JOURNAL
+===================================================== */
+
+
+/* =====================================================
+   KABAKA'S JOURNAL — PREMIUM SOCIAL LINKS
+   Authentic platform colours + editorial website theme
+===================================================== */
+
+.socials {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.socials .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  min-height: 48px;
+  padding: 9px 14px;
+
+  background: var(--surface);
+  color: var(--brand);
+
+  border: 1px solid var(--line);
+  border-radius: 13px;
+
+  font-family: var(--display);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  box-shadow: 0 3px 12px rgba(18, 52, 91, 0.035);
+
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+/* ICON CONTAINERS */
+
+.socials .social-icon {
+  width: 30px;
+  height: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+  border-radius: 9px;
+
+  background: #f2f5fa;
+}
+
+.socials .social-icon svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+}
+
+/* LINKEDIN */
+
+.socials .social-linkedin .social-icon {
+  background: #0A66C2;
+  border-radius: 7px;
+}
+
+.socials .social-linkedin .social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.socials .social-linkedin .social-icon svg path {
+  fill: #ffffff;
+}
+
+/* INSTAGRAM */
+
+.socials .social-instagram .social-icon {
+  background: #fff0f6;
+}
+
+/* WHATSAPP */
+
+.socials .social-whatsapp .social-icon {
+  background: #25D366;
+  border-radius: 50%;
+}
+
+.socials .social-whatsapp .social-icon svg {
+  width: 21px;
+  height: 21px;
+  color: #ffffff;
+}
+
+/* TIKTOK */
+
+.socials .social-tiktok .social-icon {
+  background: #f1f1f1;
+  border-radius: 50%;
+}
+
+/* LINK LABEL */
+
+.socials .social-name {
+  white-space: nowrap;
+}
+
+/* ARROW */
+
+.socials .social-arrow {
+  margin-left: 2px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  opacity: 0.65;
+  transition:
+    transform 0.22s ease,
+    color 0.22s ease,
+    opacity 0.22s ease;
+}
+
+/* HOVER EFFECT */
+
+.socials .social-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--brand-2);
+  background: var(--surface);
+  box-shadow: 0 9px 22px rgba(18, 52, 91, 0.11);
+}
+
+.socials .social-link:hover .social-arrow {
+  transform: translate(2px, -2px);
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+.socials .social-link:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* DARK THEME */
+
+:root[data-theme="dark"] .socials .social-link {
+  background: var(--surface);
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .socials .social-link:hover {
+  border-color: var(--brand-2);
+  box-shadow: 0 9px 22px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="dark"] .socials .social-icon {
+  background-color: #26384d;
+}
+
+:root[data-theme="dark"] .socials .social-linkedin .social-icon {
+  background: #0A66C2;
+}
+
+:root[data-theme="dark"] .socials .social-instagram .social-icon {
+  background: #3b253d;
+}
+
+:root[data-theme="dark"] .socials .social-whatsapp .social-icon {
+  background: #25D366;
+}
+
+:root[data-theme="dark"] .socials .social-tiktok .social-icon {
+  background: #e8e8e8;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+  .socials {
+    gap: 9px;
+  }
+
+  .socials .social-link {
+    min-height: 45px;
+    padding: 8px 11px;
+    gap: 8px;
+    font-size: 0.82rem;
+  }
+
+  .socials .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 380px) {
+  .socials {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .socials .social-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .socials .social-link,
+  .socials .social-arrow {
+    transition: none;
+  }
+}
+
 .copy{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2rem}
 
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,40px);opacity:0;background:var(--brand);color:#fff;padding:.8rem 1.4rem;border-radius:14px;font-family:var(--display);font-size:.9rem;transition:.3s;z-index:200;pointer-events:none}

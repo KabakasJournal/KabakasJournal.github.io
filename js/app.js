@@ -588,37 +588,41 @@ import { POSTS } from "./posts/index.js";
      13. ABOUT PAGE
   ===================================================== */
 
-  function aboutView() {
-    return `
-      <section class="page">
+  
+function aboutView() {
+  return `
+    <section class="page">
 
-        <div class="about-head">
+      <div class="about-head">
 
-          ${avatar()}
+        ${avatar()}
 
-          <div>
-            <h1>About</h1>
+        <div>
+          <span class="section-kicker">A little about me</span>
+          <h1>I'm Kabaka.</h1>
 
-            <p class="role">
-              ${esc(SETTINGS.author)}
-              &middot;
-              ${esc(SETTINGS.authorRole)}
-            </p>
-          </div>
-
+          <p class="role">
+            ${esc(SETTINGS.authorRole)}
+          </p>
         </div>
 
+      </div>
+
+      <div class="about-content">
         ${SETTINGS.about.map(paragraph =>
           `<p>${esc(paragraph)}</p>`
         ).join("")}
+      </div>
 
-        <p>
-          <a class="btn" href="#contact">Get in touch</a>
-        </p>
+      <div class="about-contact">
+        <p>Have something to discuss? I'd be glad to hear from you.</p>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
 
-      </section>
-    `;
-  }
+    </section>
+  `;
+}
+
 
   /* =====================================================
      14. CONTACT PAGE
@@ -905,20 +909,77 @@ import { POSTS } from "./posts/index.js";
       footerTag.textContent = SETTINGS.tagline;
     }
 
-    if (socials) {
-      socials.innerHTML = SETTINGS.social.map(social => `
-        <a
-          href="${esc(social.url)}"
-          target="_blank"
-          rel="noopener">
-          ${esc(social.name)}
-        </a>
-      `).join("");
-    }
+   
+
+if (socials) {
+  const socialIcons = {
+    linkedin: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.22a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.81 2.81 0 0 1 2.53-1.39c2.7 0 3.21 1.78 3.21 4.1Z"/>
+      </svg>
+    `,
+
+    instagram: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <defs>
+          <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFB13D"/>
+            <stop offset="45%" stop-color="#DD2A7B"/>
+            <stop offset="100%" stop-color="#8134AF"/>
+          </linearGradient>
+        </defs>
+        <rect x="3" y="3" width="18" height="18" rx="5"
+          fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
+        <circle cx="12" cy="12" r="4.2"
+          fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
+        <circle cx="17.5" cy="6.8" r="1.3" fill="#DD2A7B"/>
+      </svg>
+    `,
+
+    whatsapp: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M12.04 2a9.91 9.91 0 0 0-8.45 15.1L2 22l5.04-1.56A9.96 9.96 0 1 0 12.04 2Zm0 18.1a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-2.99.93.97-2.91-.2-.31a8.1 8.1 0 1 1 6.67 3.61Zm4.45-6.07c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.01.4 1.36.51.57.18 1.09.15 1.5.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
+      </svg>
+    `,
+
+    tiktok: `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="#25F4EE" transform="translate(-1 0)"
+          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+        <path fill="#FE2C55" transform="translate(1 0)"
+          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+        <path fill="#000000"
+          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+      </svg>
+    `
+  };
+
+  socials.innerHTML = SETTINGS.social.map(social => {
+    const iconName = String(social.icon || "").toLowerCase();
+    const icon = socialIcons[iconName] || "";
+
+    return `
+      <a
+        class="social-link social-${esc(iconName)}"
+        href="${esc(social.url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit ${esc(social.name)} profile"
+        title="${esc(social.name)}">
+
+        <span class="social-icon">${icon}</span>
+        <span class="social-name">${esc(social.name)}</span>
+        <span class="social-arrow" aria-hidden="true">↗</span>
+      </a>
+    `;
+  }).join("");
+}
+
+
 
     if (copyright) {
       copyright.textContent =
-        `Â© ${new Date().getFullYear()} ${SETTINGS.author}. All rights reserved.`;
+        `© ${new Date().getFullYear()} ${SETTINGS.author}. All rights reserved.`;
     }
 
     /* Theme */

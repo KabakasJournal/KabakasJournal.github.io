@@ -1,35 +1,34 @@
 
 /* ============ EDIT YOUR SITE DETAILS HERE ============ */
+/* ============ KABAKA'S JOURNAL SETTINGS ============ */
 
 window.CONFIG = {
   siteName: "Kabaka’s Journal",
 
-  tagline: "Knowledge Today. A Brighter Tomorrow.",
+  tagline: "Writing about what I learn, build, and experience.",
 
   author: "Ezeikpe Akachukwu Kingsley (Kabaka)",
 
-  authorRole: "Nurse, writer and app builder",
+  authorRole: "Nurse, Author, Teacher & Technology Entrepreneur",
 
-  /* Place your photograph in the images folder. */
   authorPhoto: "images/kabaka.jpg",
 
   about: [
-    "I am Ezeikpe Akachukwu Kingsley, known as Kabaka. I am a nurse, writer, learner, educator, and technology enthusiast with a deep interest in how knowledge can improve lives.",
+    "I'm Ezeikpe Akachukwu Kingsley, though most people know me as Kabaka. I'm a nurse, writer and app builder. Over time, my interests have taken me into healthcare, research, teaching, books, software and a number of other areas. I enjoy learning, asking questions and finding practical ways to put what I learn to use.",
 
-    "My interests bring together nursing and healthcare, medical education, research, writing and publishing, software development, digital tools, and the everyday lessons that shape personal growth. I created this journal as a place to explore these areas thoughtfully and share useful ideas, practical lessons, questions, and experiences.",
+    "I started this journal as a place to share some of those interests. You'll find articles about nursing and healthcare, medical education, research, writing, technology, coding, app development and digital tools. I also write about teaching, personal experiences and ideas that I think are worth discussing.",
 
-    "Some articles focus on nursing practice, clinical learning, patient communication, and professional development. Others explore coding, app development, technology, and the process of building useful digital products. You will also find reflections on writing, books, teaching, research, creativity, and life.",
+    "Some of my writing comes from professional experience. Other pieces come from studying, experimenting, building projects or simply trying to understand something better. I don't expect to have every answer, and I don't want to pretend otherwise. When I learn something worth sharing, I want to be able to explain it clearly and make it useful to someone else.",
 
-    "I believe learning should not end with collecting information. Knowledge becomes more valuable when we understand it, question it, apply it, and use it to create something meaningful. This blog reflects that belief: a growing record of learning, building, teaching, and sharing.",
+    "I also believe in learning by doing. That means writing, making mistakes, trying again, building things and being willing to start from the beginning when necessary. You'll see some of that process reflected here.",
 
-    "I do not present this space as a claim to have mastered every subject discussed here. It is a place for careful learning, honest exploration, and the exchange of ideas. Where a topic requires professional or clinical judgement, readers should consider the relevant evidence, local guidance, and qualified expertise.",
+    "This journal will grow as I do. The subjects may vary, but the intention is straightforward: to share what I know, document what I'm learning and make room for worthwhile conversations.",
 
-    "Thank you for reading and being part of the journey. If an article helps you think differently, learn something useful, or take a meaningful next step, then this journal is doing what I hoped it would do."
+    "Thank you for stopping by. I hope you find something here that is useful, interesting or simply worth your time."
   ],
 
   email: "ezeikpeakachukwu0@gmail.com",
 
-  /* Formspree contact and newsletter endpoints. */
   contactEndpoint: "https://formspree.io/f/xwllrogb",
 
   newsletterEndpoint: "https://formspree.io/f/mqppyqrj",
@@ -37,10 +36,29 @@ window.CONFIG = {
   postsPerPage: 5,
 
   social: [
-    { name: "X", url: "https://x.com/" },
-    { name: "Instagram", url: "https://instagram.com/" },
-    { name: "YouTube", url: "https://youtube.com/" },
-    { name: "GitHub", url: "https://github.com/" },
-    { name: "WhatsApp", url: "https://whatsapp.com/08133103324" }
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/akachukwu-ezeikpe-9476263a9/",
+      icon: "linkedin",
+      color: "#0A66C2"
+    },
+    {
+      name: "Instagram",
+      url: "https://www.instagram.com/real_kabaka1/",
+      icon: "instagram",
+      color: "#E4405F"
+    },
+    {
+      name: "WhatsApp",
+      url: "https://wa.me/2348133103324",
+      icon: "whatsapp",
+      color: "#25D366"
+    },
+    {
+      name: "TikTok",
+      url: "https://www.tiktok.com/@just_kabaka",
+      icon: "tiktok",
+      color: "#FE2C55"
+    }
   ]
 };
