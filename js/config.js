@@ -31,7 +31,7 @@ window.CONFIG = {
 
   contactEndpoint: "https://formspree.io/f/xwllrogb",
 
-  newsletterEndpoint: "https://formspree.io/f/mqppyqrj",
+  newsletterEndpoint: "https://docs.google.com/forms/d/e/1FAIpQLScuNgP7XIwaBsC9M9G6oTB8v5B1e0Kw_NjVhx-EQH5xQOhnzQ/viewform?usp=header",
 
   postsPerPage: 5,
 

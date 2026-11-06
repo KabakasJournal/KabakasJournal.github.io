@@ -1,6 +1,5 @@
-
 /*
-  KABAKA'S JOURNAL â€” MAIN WEBSITE ENGINE
+  KABAKA'S JOURNAL — MAIN WEBSITE ENGINE
 
   This file controls how the website displays and manages articles.
 
@@ -140,22 +139,28 @@ import { POSTS } from "./posts/index.js";
     [...new Set(ACTIVE_POSTS.flatMap(postTags))]
       .sort((a, b) => a.localeCompare(b));
 
+  // Produces the public article URL used by sharing platforms.
+  function articleUrl(post) {
+    return new URL(
+      `articles/${encodeURIComponent(post.slug)}/`,
+      location.origin + "/My-Blog/"
+    ).href;
+  }
+
   /* =====================================================
      4. ARTICLE IMAGE MANAGEMENT
   ===================================================== */
 
   function imageAttrs(post) {
-  // Image elements use paths relative to the website root.
-  // CSS background images may use ../images/ because they are in css/style.css.
-  const fallback = categoryImageFor(post).replace(/^\.\.\//, "");
-  const preferred = post.image || "";
+    const fallback = categoryImageFor(post).replace(/^\.\.\//, "");
+    const preferred = post.image || "";
 
-  return `
-    src="${esc(fallback)}"
-    data-preferred="${esc(preferred)}"
-    data-fallback="${esc(fallback)}"
-  `;
-}
+    return `
+      src="${esc(fallback)}"
+      data-preferred="${esc(preferred)}"
+      data-fallback="${esc(fallback)}"
+    `;
+  }
 
   function upgradeArticleImages() {
     document.querySelectorAll("img[data-preferred]").forEach(img => {
@@ -218,37 +223,37 @@ import { POSTS } from "./posts/index.js";
     `;
   }
 
-function authorCard() {
-  return `
-    <aside class="author-card">
+  function authorCard() {
+    return `
+      <aside class="author-card">
 
-      <div class="author-card-profile">
-        ${avatar("sm")}
-      </div>
+        <div class="author-card-profile">
+          ${avatar("sm")}
+        </div>
 
-      <div class="author-card-content">
+        <div class="author-card-content">
 
-        <span class="section-kicker">About the author</span>
+          <span class="section-kicker">About the author</span>
 
-        <h3>${esc(SETTINGS.author)}</h3>
+          <h3>${esc(SETTINGS.author)}</h3>
 
-        <p class="role">
-          ${esc(SETTINGS.authorRole)}
-        </p>
+          <p class="role">
+            ${esc(SETTINGS.authorRole)}
+          </p>
 
-        <p class="author-bio">
-          ${esc(SETTINGS.authorBio)}
-        </p>
+          <p class="author-bio">
+            ${esc(SETTINGS.authorBio)}
+          </p>
 
-        <a href="#about" class="author-more">
-          Read my full story &rarr;
-        </a>
+          <a href="#about" class="author-more">
+            Read my full story &rarr;
+          </a>
 
-      </div>
+        </div>
 
-    </aside>
-  `;
-}
+      </aside>
+    `;
+  }
 
   /* =====================================================
      7. CATEGORY AND TOPIC DISCOVERY
@@ -369,39 +374,43 @@ function authorCard() {
   }
 
   /* =====================================================
-     10. NEWSLETTER
+     10. NEWSLETTER — FOLLOW MY BLOG
   ===================================================== */
 
   function newsletter() {
     return `
-      <section class="news">
+      <section class="news" id="subscribe">
 
         <div>
-          <h2>Get new posts in your inbox</h2>
+          <span class="section-kicker">Stay connected</span>
+
+          <h2>Follow My Blog</h2>
 
           <p>
-            One short email when I publish.
-            No spam, leave any time.
+            Enjoy reading Kabaka's Journal?
+            Subscribe to receive articles, useful lessons and
+            thoughtful updates from the journal by email.
+            No spam. You can unsubscribe whenever you wish.
           </p>
         </div>
 
-        <form id="newsForm">
-          <input
-            type="email"
-            name="email"
-            placeholder="Your email address"
-            required
-            aria-label="Email address">
+        <div class="newsletter-action">
 
-          <button class="btn" type="submit">
-            Subscribe
-          </button>
-        </form>
+          <a
+            class="btn"
+            href="${esc(SETTINGS.newsletterEndpoint)}"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            Subscribe to Kabaka's Journal
+
+          </a>
+
+        </div>
 
       </section>
     `;
   }
-
   /* =====================================================
      11. ARTICLE LIST PAGE
   ===================================================== */
@@ -490,7 +499,78 @@ function authorCard() {
   }
 
   /* =====================================================
-     12. SINGLE ARTICLE PAGE
+     12. ARTICLE SHARING ICONS
+  ===================================================== */
+
+  function shareIcon(platform) {
+    const icons = {
+      whatsapp: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M12.04 2a9.91 9.91 0 0 0-8.45 15.1L2 22l5.04-1.56A9.96 9.96 0 1 0 12.04 2Zm0 18.1a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-2.99.93.97-2.91-.2-.31a8.1 8.1 0 1 1 6.67 3.61Zm4.45-6.07c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.01.4 1.36.51.57.18 1.09.15 1.5.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
+        </svg>
+      `,
+
+      facebook: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M13.5 21v-8.2h2.76l.41-3.2H13.5V7.56c0-.93.26-1.56 1.6-1.56h1.7V3.14C15.97 3.05 15.13 3 14.28 3c-2.5 0-4.21 1.53-4.21 4.34V9.6H7.25v3.2h2.82V21h3.43Z"/>
+        </svg>
+      `,
+
+      x: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.42L5.56 22H2.42l7.25-8.29L1.8 2h6.4l4.43 6.76L18.9 2Zm-1.1 18h1.73L7.27 3.89H5.41L17.8 20Z"/>
+        </svg>
+      `,
+
+      linkedin: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.22a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.81 2.81 0 0 1 2.53-1.39c2.7 0 3.21 1.78 3.21 4.1Z"/>
+        </svg>
+      `,
+
+      telegram: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M21.8 4.2 18.5 20c-.25 1.12-.9 1.4-1.83.87l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.14 9.36-8.45c.41-.36-.09-.56-.63-.2L5.68 13.4.7 11.84c-1.08-.34-1.1-1.08.22-1.6L20.4 2.7c.9-.33 1.68.22 1.4 1.5Z"/>
+        </svg>
+      `,
+
+      reddit: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M21.5 12a2.5 2.5 0 0 0-4.2-1.82 12.4 12.4 0 0 0-4.45-1.3l.76-3.56 2.48.53a1.7 1.7 0 1 0 .2-1.05l-3.02-.64a.55.55 0 0 0-.66.42l-.9 4.25a12.6 12.6 0 0 0-5.02 1.35A2.5 2.5 0 1 0 3.5 14.3c0 3.25 3.8 5.9 8.5 5.9s8.5-2.65 8.5-5.9c0-.3-.03-.6-.1-.89A2.48 2.48 0 0 0 21.5 12ZM8 13.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Zm7.05 3.38a4.7 4.7 0 0 1-6.1 0 .5.5 0 0 1 .7-.71 3.7 3.7 0 0 0 4.7 0 .5.5 0 0 1 .7.71ZM16 13.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z"/>
+        </svg>
+      `,
+
+      email: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            d="M3 5h18v14H3z M3 6l9 7 9-7"/>
+        </svg>
+      `,
+
+      copy: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            d="M10 13a5 5 0 0 0 7.07 0l3-3A5 5 0 0 0 13 2.93l-1.72 1.71"/>
+          <path fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+            d="M14 11a5 5 0 0 0-7.07 0l-3 3A5 5 0 0 0 11 21.07l1.71-1.71"/>
+        </svg>
+      `
+    };
+
+    return icons[platform] || "";
+  }
+
+  /* =====================================================
+     13. SINGLE ARTICLE PAGE
   ===================================================== */
 
   function postView(post) {
@@ -504,11 +584,17 @@ function authorCard() {
       )
       .slice(0, 3);
 
-    const url = encodeURIComponent(
-      new URL(`articles/${encodeURIComponent(post.slug)}/`, location.origin + "/My-Blog/").href
-    );
+    const publicUrl = articleUrl(post);
+    const encodedUrl = encodeURIComponent(publicUrl);
+    const encodedTitle = encodeURIComponent(post.title);
 
-    const title = encodeURIComponent(post.title);
+    const description = post.excerpt || `${post.title} - ${SETTINGS.siteName}`;
+    const encodedText = encodeURIComponent(description);
+
+    const emailSubject = encodeURIComponent(`I thought you might enjoy: ${post.title}`);
+    const emailBody = encodeURIComponent(
+      `${description}\n\nRead the article here:\n${publicUrl}`
+    );
 
     document.title = `${post.title} | ${SETTINGS.siteName}`;
 
@@ -546,36 +632,107 @@ function authorCard() {
           `).join("")}
         </div>
 
-        <div class="share">
+        <section class="share-section" aria-label="Share this article">
 
-          <span>Share:</span>
+          <div class="share-heading">
+            <span class="section-kicker">Enjoyed this article?</span>
+            <h2>Share This Article</h2>
+            <p>
+              Know someone who might find this useful?
+              Share it with them.
+            </p>
+          </div>
 
-          <a
-            href="https://wa.me/?text=${title}%20${url}"
-            target="_blank"
-            rel="noopener">
-            WhatsApp
-          </a>
+          <div class="share">
 
-          <a
-            href="https://twitter.com/intent/tweet?text=${title}&url=${url}"
-            target="_blank"
-            rel="noopener">
-            X
-          </a>
+            <a
+              class="share-link share-whatsapp"
+              href="https://wa.me/?text=${encodedTitle}%20${encodedUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on WhatsApp"
+              title="WhatsApp">
+              <span class="share-icon">${shareIcon("whatsapp")}</span>
+              <span>WhatsApp</span>
+            </a>
 
-          <a
-            href="https://www.facebook.com/sharer/sharer.php?u=${url}"
-            target="_blank"
-            rel="noopener">
-            Facebook
-          </a>
+            <a
+              class="share-link share-facebook"
+              href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Facebook"
+              title="Facebook">
+              <span class="share-icon">${shareIcon("facebook")}</span>
+              <span>Facebook</span>
+            </a>
 
-          <button id="copyLink" type="button">
-            Copy link
-          </button>
+            <a
+              class="share-link share-x"
+              href="https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on X"
+              title="X">
+              <span class="share-icon">${shareIcon("x")}</span>
+              <span>X</span>
+            </a>
 
-        </div>
+            <a
+              class="share-link share-linkedin"
+              href="https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on LinkedIn"
+              title="LinkedIn">
+              <span class="share-icon">${shareIcon("linkedin")}</span>
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              class="share-link share-telegram"
+              href="https://t.me/share/url?url=${encodedUrl}&text=${encodedText}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Telegram"
+              title="Telegram">
+              <span class="share-icon">${shareIcon("telegram")}</span>
+              <span>Telegram</span>
+            </a>
+
+            <a
+              class="share-link share-reddit"
+              href="https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Share on Reddit"
+              title="Reddit">
+              <span class="share-icon">${shareIcon("reddit")}</span>
+              <span>Reddit</span>
+            </a>
+
+            <a
+              class="share-link share-email"
+              href="mailto:?subject=${emailSubject}&body=${emailBody}"
+              aria-label="Share by email"
+              title="Email">
+              <span class="share-icon">${shareIcon("email")}</span>
+              <span>Email</span>
+            </a>
+
+            <button
+              class="share-link share-copy"
+              id="copyLink"
+              type="button"
+              aria-label="Copy article link"
+              title="Copy link">
+              <span class="share-icon">${shareIcon("copy")}</span>
+              <span>Copy Link</span>
+            </button>
+
+          </div>
+
+        </section>
 
       </article>
 
@@ -602,47 +759,60 @@ function authorCard() {
   }
 
   /* =====================================================
-     13. ABOUT PAGE
+     14. ABOUT PAGE
   ===================================================== */
 
-  
-function aboutView() {
-  return `
-    <section class="page">
+  function aboutView() {
+    return `
+      <section class="page">
 
-      <div class="about-head">
+        <div class="about-head">
 
-        ${avatar()}
+          ${avatar()}
 
-        <div>
-          <span class="section-kicker">A little about me</span>
-          <h1>I'm Kabaka.</h1>
+          <div>
+            <span class="section-kicker">A little about me</span>
+            <h1>I'm Kabaka.</h1>
 
-          <p class="role">
-            ${esc(SETTINGS.authorRole)}
-          </p>
+            <p class="role">
+              ${esc(SETTINGS.authorRole)}
+            </p>
+          </div>
+
         </div>
 
-      </div>
+        <div class="about-content">
+          ${SETTINGS.about.map(paragraph =>
+            `<p>${esc(paragraph)}</p>`
+          ).join("")}
+        </div>
 
-      <div class="about-content">
-        ${SETTINGS.about.map(paragraph =>
-          `<p>${esc(paragraph)}</p>`
-        ).join("")}
-      </div>
+        <div class="about-contact">
 
-      <div class="about-contact">
-        <p>Have something to discuss? I'd be glad to hear from you.</p>
-        <a class="btn" href="#contact">Get in touch</a>
-      </div>
+          <p>
+            Have something to discuss? I'd be glad to hear from you.
+          </p>
 
-    </section>
-  `;
-}
+          <div class="about-actions">
 
+            <a class="btn" href="#contact">
+              Get in touch
+            </a>
+
+            <a class="follow-blog-btn" href="#subscribe">
+              Follow My Blog<span aria-hidden="true">→</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+    `;
+  }
 
   /* =====================================================
-     14. CONTACT PAGE
+     15. CONTACT PAGE
   ===================================================== */
 
   function contactView() {
@@ -683,7 +853,7 @@ function aboutView() {
   }
 
   /* =====================================================
-     15. WEBSITE ROUTER
+     16. WEBSITE ROUTER
   ===================================================== */
 
   function route() {
@@ -789,13 +959,21 @@ function aboutView() {
 
     bind();
 
-    if (!query) {
+    // The Follow My Blog buttons lead to the homepage newsletter.
+    if (hash === "subscribe") {
+      requestAnimationFrame(() => {
+        $("#subscribe")?.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      });
+    } else if (!query) {
       window.scrollTo(0, 0);
     }
   }
 
   /* =====================================================
-     16. FORM SUBMISSION
+     17. FORM SUBMISSION
   ===================================================== */
 
   async function sendForm(form, endpoint, successMessage, fallback) {
@@ -828,7 +1006,7 @@ function aboutView() {
   }
 
   /* =====================================================
-     17. PAGE INTERACTIONS
+     18. PAGE INTERACTIONS
   ===================================================== */
 
   function bind() {
@@ -841,36 +1019,34 @@ function aboutView() {
       };
     }
 
+    // Copy the public article URL, not the temporary page address.
     const copy = $("#copyLink");
 
     if (copy) {
       copy.onclick = async () => {
+        const currentHash = decodeURIComponent(
+          location.hash.replace(/^#/, "")
+        );
+
+        const currentPost = ACTIVE_POSTS.find(
+          article => article.slug === currentHash
+        );
+
+        const linkToCopy = currentPost
+          ? articleUrl(currentPost)
+          : location.href;
+
         try {
-          await navigator.clipboard.writeText(location.href);
-          toast("Link copied");
+          await navigator.clipboard.writeText(linkToCopy);
+          toast("Article link copied");
         } catch (error) {
-          toast("Copy the link from the address bar");
+          toast("Copy the article link from your browser address bar");
         }
       };
     }
 
-    const newsletterForm = $("#newsForm");
 
-    if (newsletterForm) {
-      newsletterForm.onsubmit = event => {
-        event.preventDefault();
-
-        sendForm(
-          newsletterForm,
-          SETTINGS.newsletterEndpoint,
-          "Thanks for subscribing!",
-          () => {
-            newsletterForm.reset();
-            toast("Demo mode: add newsletterEndpoint in config.js");
-          }
-        );
-      };
-    }
+      
 
     const contactForm = $("#contactForm");
 
@@ -903,14 +1079,103 @@ function aboutView() {
   }
 
   /* =====================================================
-     18. STATIC WEBSITE ELEMENTS
+     19. FOOTER SOCIAL LINKS — FOLLOW ME
+  ===================================================== */
+
+  function setupSocialLinks() {
+    const socials = $("#socials");
+
+    if (!socials) return;
+
+    const socialIcons = {
+      linkedin: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.22a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.81 2.81 0 0 1 2.53-1.39c2.7 0 3.21 1.78 3.21 4.1Z"/>
+        </svg>
+      `,
+
+      instagram: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <defs>
+            <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#FFB13D"/>
+              <stop offset="45%" stop-color="#DD2A7B"/>
+              <stop offset="100%" stop-color="#8134AF"/>
+            </linearGradient>
+          </defs>
+          <rect x="3" y="3" width="18" height="18" rx="5"
+            fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
+          <circle cx="12" cy="12" r="4.2"
+            fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
+          <circle cx="17.5" cy="6.8" r="1.3" fill="#DD2A7B"/>
+        </svg>
+      `,
+
+      whatsapp: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12.04 2a9.91 9.91 0 0 0-8.45 15.1L2 22l5.04-1.56A9.96 9.96 0 1 0 12.04 2Zm0 18.1a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-2.99.93.97-2.91-.2-.31a8.1 8.1 0 1 1 6.67 3.61Zm4.45-6.07c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.01.4 1.36.51.57.18 1.09.15 1.5.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
+        </svg>
+      `,
+
+      tiktok: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#25F4EE" transform="translate(-1 0)"
+            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+          <path fill="#FE2C55" transform="translate(1 0)"
+            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+          <path fill="#000000"
+            d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
+        </svg>
+      `
+    };
+
+    const links = SETTINGS.social.map(social => {
+      const iconName = String(social.icon || "").toLowerCase();
+      const icon = socialIcons[iconName] || "";
+
+      return `
+        <a
+          class="social-link social-${esc(iconName)}"
+          href="${esc(social.url)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit ${esc(social.name)} profile"
+          title="${esc(social.name)}">
+
+          <span class="social-icon">${icon}</span>
+          <span class="social-name">${esc(social.name)}</span>
+          <span class="social-arrow" aria-hidden="true">↗</span>
+
+        </a>
+      `;
+    }).join("");
+
+  socials.innerHTML = `
+  <div class="follow-me-heading">
+    Follow Me
+  </div>
+
+  <div class="social-links">
+    ${links}
+  </div>
+
+  <a class="follow-blog-btn"
+     href="${esc(SETTINGS.newsletterEndpoint)}"
+     target="_blank"
+     rel="noopener noreferrer">
+    Subscribe to Kabaka's Journal <span aria-hidden="true">→</span>
+  </a>
+`;
+  }
+
+  /* =====================================================
+     20. STATIC WEBSITE ELEMENTS
   ===================================================== */
 
   function setup() {
     const brand = $("#brand");
     const footerBrand = $("#footBrand");
     const footerTag = $("#footTag");
-    const socials = $("#socials");
     const copyright = $("#copy");
 
     if (brand) {
@@ -926,73 +1191,7 @@ function aboutView() {
       footerTag.textContent = SETTINGS.tagline;
     }
 
-   
-
-if (socials) {
-  const socialIcons = {
-    linkedin: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.4h2.67ZM7 8.22a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1ZM18.34 18h-2.67v-4.18c0-1-.02-2.29-1.4-2.29-1.4 0-1.61 1.1-1.61 2.22V18H10V9.4h2.56v1.17h.04a2.81 2.81 0 0 1 2.53-1.39c2.7 0 3.21 1.78 3.21 4.1Z"/>
-      </svg>
-    `,
-
-    instagram: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <defs>
-          <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#FFB13D"/>
-            <stop offset="45%" stop-color="#DD2A7B"/>
-            <stop offset="100%" stop-color="#8134AF"/>
-          </linearGradient>
-        </defs>
-        <rect x="3" y="3" width="18" height="18" rx="5"
-          fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
-        <circle cx="12" cy="12" r="4.2"
-          fill="none" stroke="url(#instagramGradient)" stroke-width="2.2"/>
-        <circle cx="17.5" cy="6.8" r="1.3" fill="#DD2A7B"/>
-      </svg>
-    `,
-
-    whatsapp: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="currentColor" d="M12.04 2a9.91 9.91 0 0 0-8.45 15.1L2 22l5.04-1.56A9.96 9.96 0 1 0 12.04 2Zm0 18.1a8.13 8.13 0 0 1-4.15-1.14l-.3-.18-2.99.93.97-2.91-.2-.31a8.1 8.1 0 1 1 6.67 3.61Zm4.45-6.07c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.01.4 1.36.51.57.18 1.09.15 1.5.09.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"/>
-      </svg>
-    `,
-
-    tiktok: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path fill="#25F4EE" transform="translate(-1 0)"
-          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
-        <path fill="#FE2C55" transform="translate(1 0)"
-          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
-        <path fill="#000000"
-          d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.55v13.67a2.9 2.9 0 0 1-2.9 2.9 2.9 2.9 0 1 1 2.9-2.9c0-.16-.01-.32-.04-.47V11.6a6.46 6.46 0 1 0 3.59 5.8V10.4a8.37 8.37 0 0 0 4.9 1.58V8.43a4.85 4.85 0 0 1-1.13-.13Z"/>
-      </svg>
-    `
-  };
-
-  socials.innerHTML = SETTINGS.social.map(social => {
-    const iconName = String(social.icon || "").toLowerCase();
-    const icon = socialIcons[iconName] || "";
-
-    return `
-      <a
-        class="social-link social-${esc(iconName)}"
-        href="${esc(social.url)}"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit ${esc(social.name)} profile"
-        title="${esc(social.name)}">
-
-        <span class="social-icon">${icon}</span>
-        <span class="social-name">${esc(social.name)}</span>
-        <span class="social-arrow" aria-hidden="true">↗</span>
-      </a>
-    `;
-  }).join("");
-}
-
-
+    setupSocialLinks();
 
     if (copyright) {
       copyright.textContent =
@@ -1114,13 +1313,10 @@ if (socials) {
   }
 
   /* =====================================================
-     19. START THE WEBSITE
+     21. START THE WEBSITE
   ===================================================== */
 
   setup();
   route();
 
 })();
-
-
-

@@ -414,5 +414,287 @@ body{font-size:1.08rem;line-height:1.72}
 @media(max-width:760px){.hero{min-height:410px;border-radius:22px;background-position:58% center}.topics{grid-template-columns:repeat(2,minmax(0,1fr))}.topic{min-height:125px}.section-head{align-items:flex-start}.filters{width:100%}.card .cover{height:190px}}
 @media(max-width:420px){.wrap{width:min(100% - 1.5rem,1120px)}.hero{padding:1.5rem;min-height:390px}.hero h1{font-size:2.45rem}.topics{gap:.6rem}.topic{min-height:112px;padding:.8rem}}
 
+/* ==========================================
+   KABAKA'S JOURNAL — ARTICLE SHARING DESIGN
+========================================== */
+
+.share-section {
+  margin: 42px 0;
+  padding: 25px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.share-heading {
+  margin-bottom: 18px;
+}
+
+.share-heading h2 {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.share-heading p {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.share {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  font-family: var(--display);
+}
+
+/* Individual share buttons */
+
+.share a,
+.share button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 43px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.share a:hover,
+.share button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 17px rgba(0,0,0,.10);
+}
+
+/* Icon containers */
+
+.share-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.share-icon svg {
+  display: block;
+  width: 19px;
+  height: 19px;
+}
+
+/* Official platform colours */
+
+.share-whatsapp .share-icon {
+  background: #25D366;
+  color: white;
+}
+
+.share-facebook .share-icon {
+  background: #1877F2;
+  color: white;
+}
+
+.share-x .share-icon {
+  background: #000;
+  color: white;
+}
+
+.share-linkedin .share-icon {
+  background: #0A66C2;
+  color: white;
+}
+
+.share-telegram .share-icon {
+  background: #229ED9;
+  color: white;
+}
+
+.share-reddit .share-icon {
+  background: #FF4500;
+  color: white;
+}
+
+.share-email .share-icon {
+  background: #B88A44;
+  color: white;
+}
+
+.share-copy .share-icon {
+  background: var(--brand-2);
+  color: white;
+}
+
+/* Dark mode */
+
+:root[data-theme="dark"] .share a,
+:root[data-theme="dark"] .share button {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .share-section {
+    padding: 17px;
+  }
+
+  .share {
+    gap: 9px;
+  }
+
+  .share a,
+  .share button {
+    min-height: 40px;
+    padding: 7px 10px;
+    font-size: .78rem;
+  }
+
+  .share-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .share-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+/* =========================================
+   HEADER FOLLOW MY BLOG BUTTON
+   Elegant navy and gold editorial styling
+========================================= */
+
+.header-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 17px;
+
+  background: var(--accent);
+  color: #17243a;
+
+  border: 1px solid rgba(232, 184, 92, 0.85);
+  border-radius: 8px;
+
+  font-family: var(--display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-decoration: none;
+  white-space: nowrap;
+
+  box-shadow: 0 3px 10px rgba(20, 45, 75, 0.10);
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.header-follow-btn:hover {
+  background: #d9a844;
+  color: #10213a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(20, 45, 75, 0.16);
+}
+
+.header-follow-btn:focus-visible {
+  outline: 3px solid var(--brand-2);
+  outline-offset: 3px;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] .header-follow-btn {
+  background: var(--accent);
+  color: #17243a;
+  border-color: var(--accent);
+}
+
+:root[data-theme="dark"] .header-follow-btn:hover {
+  background: #f3c875;
+  color: #10213a;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+  .header-follow-btn {
+    padding: 8px 11px;
+    font-size: 0.68rem;
+    border-radius: 7px;
+  }
+}
+
+/* =====================================
+   KABAKA'S JOURNAL - FOLLOW BLOG BUTTON
+===================================== */
+
+.follow-blog-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 13px 24px;
+  background: #107cbbd8;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border: 1px solid #0f766e;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.follow-blog-btn:hover {
+  background: #1b1099;
+  border-color: #1b1099;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 118, 110, 0.22);
+}
+
+.follow-blog-btn span {
+  font-size: 1.15rem;
+  transition: transform 0.25s ease;
+}
+
+.follow-blog-btn:hover span {
+  transform: translateX(4px);
+}
+
+.follow-blog-btn:focus-visible {
+  outline: 3px solid rgba(28, 60, 240, 0.727);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .follow-blog-btn {
+    width: 100%;
+    padding: 14px 11px;
+  }
+}
+
 
 
