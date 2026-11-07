@@ -21,7 +21,9 @@ images/nursing/nursing-council-exam-preparation.jpg
 
 WRITING
 images/writing/the-ugly-first-draft.jpg
-images/writing/how-to-build-a-story-world.jpg
+
+RESEARCH
+images/research/how-to-conduct-effective-research.jpg
 
 TECHNOLOGY
 images/technology/my-first-flutter-app.jpg

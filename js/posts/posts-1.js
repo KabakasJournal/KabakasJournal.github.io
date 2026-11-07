@@ -1,4 +1,4 @@
-﻿/* ============ YOUR POSTS ============
+/* ============ YOUR POSTS ============
    To add a post: copy one block, change the values, keep the comma between blocks.
    - slug: short name with letters, numbers and dashes only (used in the link)
    - cover: two colours for the card background, plus a symbol
@@ -925,7 +925,7 @@ x = 5</code></pre>
   `,
 },
  {
-  slug: "how-to-build-a-story-world",
+  slug: "how-to-conduct-effective-research",
   image: "images/research/how-to-conduct-effective-research.jpg",
   title: "How to Conduct Effective Research: From Questions to Reliable Findings",
   category: "Research",
