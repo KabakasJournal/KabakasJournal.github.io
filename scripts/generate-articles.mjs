@@ -62,6 +62,7 @@ for (const post of POSTS.filter(p => p.published !== false)) {
   const html = `<!doctype html>
 <html lang="en">
 <head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426567753637486" crossorigin="anonymous"></script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(excerpt)}">
 <link rel="canonical" href="${esc(canonical)}"><meta name="robots" content="index,follow,max-image-preview:large">
