@@ -10,7 +10,7 @@ const getConfig = (key, fallback) => {
   const match = configText.match(new RegExp(`${key}:\\s*["']([^"']*)["']`));
   return match?.[1] || fallback;
 };
-const siteName = getConfig('siteName', 'Kabaka’s Journal');
+const siteName = getConfig('siteName', "Kabaka's Journal");
 const author = getConfig('author', 'Kabaka');
 const authorRole = getConfig('authorRole', 'Writer and educator');
 const authorPhoto = getConfig('authorPhoto', '');
@@ -29,7 +29,7 @@ for (const post of POSTS.filter(p => p.published !== false)) {
   const canonical = `${site}articles/${slug}/`;
   const title = `${clean(post.title)} | ${siteName}`;
   const excerpt = clean(post.excerpt || description).slice(0, 300);
-  const image = post.image ? `${site}${post.image.replace(/^\//, '')}` : `${site}favicon.svg`;
+  const image = post.image ? `${site}${post.image.replace(/^\//, '')}` : `${site}kabakas-journal-favicon.png`;
   const date = dateIso(post.date);
   const content = post.content || '<p>This article is being prepared.</p>';
   const tags = Array.isArray(post.tags) ? post.tags : [];
@@ -64,12 +64,12 @@ for (const post of POSTS.filter(p => p.published !== false)) {
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(excerpt)}">
 <link rel="canonical" href="${esc(canonical)}"><meta name="robots" content="index,follow,max-image-preview:large">
-<meta property="og:type" content="article"><meta property="og:site_name" content="${esc(siteName)}"><meta property="og:title" content="${esc(clean(post.title))}"><meta property="og:description" content="${esc(excerpt)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${esc(image)}">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(clean(post.title))}"><meta name="twitter:description" content="${esc(excerpt)}"><meta name="twitter:image" content="${esc(image)}">
-<link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../css/style.css">
+<meta property="og:type" content="article"><meta property="og:site_name" content="${esc(siteName)}"><meta property="og:title" content="${esc(clean(post.title))}"><meta property="og:description" content="${esc(excerpt)}"><meta property="og:url" content="${esc(canonical)}"><meta property="og:image" content="${esc(image)}"><meta property="og:image:alt" content="${esc(clean(post.title))}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(clean(post.title))}"><meta name="twitter:description" content="${esc(excerpt)}"><meta name="twitter:image" content="${esc(image)}"><meta name="twitter:image:alt" content="${esc(clean(post.title))}">
+<link rel="icon" type="image/png" sizes="512x512" href="../../kabakas-journal-favicon.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="../../css/style.css">
 <script type="application/ld+json">${JSON.stringify(schema)}</script>
 </head><body><header class="site-header"><div class="wrap bar"><a class="brand" href="../../">${esc(siteName)}</a><nav class="nav" aria-label="Main"><a href="../../">Home</a><a href="../../#about">About</a><a href="../../#contact">Contact</a></nav></div></header>
-<main class="wrap" style="padding-top:2rem;padding-bottom:4rem"><article class="article"><div class="crumbs"><a href="../../">Home</a> / <a href="../../#cat-${encodeURIComponent(String(post.category || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}">${esc(post.category || 'Article')}</a></div><h1>${esc(post.title)}</h1><div class="byline"><span>By ${esc(author)}</span>${date ? `<time datetime="${date}">${new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'})}</time>` : ''}<span>${Number(post.readTime) || 1} min read</span></div>${post.image ? `<figure class="article-cover"><img src="../../${esc(post.image.replace(/^\//,''))}" alt="${esc(post.category || 'Article')} article image"></figure>` : ''}<div class="prose">${content}</div><div class="tags">${tagLinks}</div><section class="share-section" aria-label="Share this article">
+<main class="wrap" style="padding-top:2rem;padding-bottom:4rem"><article class="article"><div class="crumbs"><a href="../../">Home</a> / <a href="../../#cat-${encodeURIComponent(String(post.category || '').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}">${esc(post.category || 'Article')}</a></div><h1>${esc(post.title)}</h1><div class="byline"><span>By ${esc(author)}</span>${date ? `<time datetime="${date}">${new Date(`${date}T12:00:00Z`).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'})}</time>` : ''}<span>${Number(post.readTime) || 1} min read</span></div>${post.image ? `<figure class="article-cover"><img src="../../${esc(post.image.replace(/^\//,''))}" alt="${esc(clean(post.title))}"></figure>` : ''}<div class="prose">${content}</div><div class="tags">${tagLinks}</div><section class="share-section" aria-label="Share this article">
 <div class="share-heading"><span class="section-kicker">Enjoyed this article?</span><h2>Share This Article</h2><p>Know someone who might find this useful? Share it with them.</p></div>
 <div class="share">
 <a class="share-link share-whatsapp" href="https://wa.me/?text=${encodedTitle}%20${encodedUrl}" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp" title="WhatsApp"><span class="share-icon">${shareIcon("whatsapp")}</span><span>WhatsApp</span></a>
