@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { POSTS } from '../js/posts/index.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const site = 'https://kabaxion.github.io/';
+const site = 'https://kabakasjournal.github.io/';
 const configText = fs.readFileSync(path.join(root, 'js/config.js'), 'utf8');
 const getConfig = (key, fallback) => {
   const match = configText.match(new RegExp(`${key}:\\s*["']([^"']*)["']`));
@@ -84,6 +84,7 @@ for (const post of POSTS.filter(p => p.published !== false)) {
 <button class="share-link share-copy" id="copyLink" type="button" aria-label="Copy article link" title="Copy link"><span class="share-icon">${shareIcon("copy")}</span><span>Copy Link</span></button>
 </div></section></article>
 <section class="article"><aside class="author-card"><div class="author-card-profile"><div class="avatar sm"><span>${esc(author.charAt(0).toUpperCase() || 'K')}</span><img src="../../${esc(authorPhoto)}" alt="Photo of ${esc(author)}" onerror="this.remove()"></div></div><div class="author-card-content"><span class="section-kicker">About the author</span><h3>${esc(author)}</h3><p class="role">${esc(authorRole)}</p><p class="author-bio">${esc(authorBio)}</p><a href="../../#about" class="author-more">Read my full story &rarr;</a></div></aside></section></main>
+<div class="ad-unit" style="margin:2rem auto;max-width:1000px;min-height:100px;text-align:center"><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6426567753637486" data-ad-slot="8269854670" data-ad-format="auto" data-full-width-responsive="true"></ins></div><script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 <footer class="site-footer"><div class="wrap foot"><strong>${esc(siteName)}</strong><p>${esc(authorRole)}</p><p><a href="../../privacy.html">Privacy Policy</a></p></div><p class="copy">&copy; ${new Date().getFullYear()} ${esc(author)}. All rights reserved.</p></footer>
 <script>document.getElementById('copyLink')?.addEventListener('click',async()=>{const button=document.getElementById('copyLink');try{await navigator.clipboard.writeText(window.location.href);button.querySelector('span:last-child').textContent='Copied!';}catch(e){window.prompt('Copy this article link:',window.location.href);}});</script>
 </body></html>`;
