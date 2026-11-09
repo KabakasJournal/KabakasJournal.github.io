@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { POSTS } from '../js/posts/index.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const site = 'https://kabaxion.github.io/My-Blog/';
+const site = 'https://kabaxion.github.io/';
 const configText = fs.readFileSync(path.join(root, 'js/config.js'), 'utf8');
 const getConfig = (key, fallback) => {
   const match = configText.match(new RegExp(`${key}:\\s*["']([^"']*)["']`));

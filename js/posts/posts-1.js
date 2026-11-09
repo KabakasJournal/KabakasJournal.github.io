@@ -22,7 +22,7 @@ export const POSTS = [
     ],
     date: "2026-10-30",
     readTime: 9,
-    cover: { a: "#0B3B5C", b: "#2B8FCB", symbol: "âœš" },
+    cover: { a: "#0B3B5C", b: "#2B8FCB", symbol: "✚" },
     excerpt:
       "Effective nursing communication requires more than explaining a diagnosis. Explore health literacy, therapeutic communication, plain-language counselling, teach-back, and evidence-informed strategies for improving patient comprehension, treatment adherence, and safety.",
     content: `

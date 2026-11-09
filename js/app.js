@@ -143,7 +143,7 @@ import { POSTS } from "./posts/index.js";
   function articleUrl(post) {
     return new URL(
       `articles/${encodeURIComponent(post.slug)}/`,
-      location.origin + "/My-Blog/"
+      location.origin + "/"
     ).href;
   }
 
@@ -200,7 +200,7 @@ import { POSTS } from "./posts/index.js";
     }, 2600);
   }
 
-  /* =====================================================
+   /* =====================================================
      6. AUTHOR COMPONENTS
   ===================================================== */
 
@@ -224,36 +224,18 @@ import { POSTS } from "./posts/index.js";
   }
 
   function authorCard() {
-    return `
-      <aside class="author-card">
-
-        <div class="author-card-profile">
-          ${avatar("sm")}
-        </div>
-
-        <div class="author-card-content">
-
-          <span class="section-kicker">About the author</span>
-
-          <h3>${esc(SETTINGS.author)}</h3>
-
-          <p class="role">
-            ${esc(SETTINGS.authorRole)}
-          </p>
-
-          <p class="author-bio">
-            ${esc(SETTINGS.authorBio)}
-          </p>
-
-          <a href="#about" class="author-more">
-            Read my full story &rarr;
-          </a>
-
-        </div>
-
-      </aside>
-    `;
-  }
+  return `
+    <aside class="author-card" aria-label="About the author">
+      ${avatar("sm")}
+      <div>
+        <strong>${esc(SETTINGS.author)}</strong>
+        <span class="role">${esc(SETTINGS.authorRole)}</span>
+        <p>${esc(SETTINGS.authorBio)}</p>
+        <a href="#about">Read my full story →</a>
+      </div>
+    </aside>
+  `;
+}
 
   /* =====================================================
      7. CATEGORY AND TOPIC DISCOVERY
@@ -898,10 +880,12 @@ import { POSTS } from "./posts/index.js";
 
     } else if (hash === "about") {
       html = aboutView();
+      document.title = "About Kabaka | " + SETTINGS.siteName;
       nav = "about";
 
     } else if (hash === "contact") {
       html = contactView();
+      document.title = "Contact | " + SETTINGS.siteName;
       nav = "contact";
 
     } else if (hash.startsWith("cat-")) {

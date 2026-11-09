@@ -11,6 +11,8 @@ window.CONFIG = {
 
   authorRole: "Nurse, Author, Teacher & Technology Entrepreneur",
 
+  authorBio: "I’m Kabaka, a registered nurse, writer, educator and app developer. I write about healthcare, education, research, technology and the experience of learning and creating.",
+
   authorPhoto: "images/kabaka.jpg",
 
   about: [

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kabaxion.github.io/My-Blog/sitemap.xml
+Sitemap: https://kabaxion.github.io/sitemap.xml
