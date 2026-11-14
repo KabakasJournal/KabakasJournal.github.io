@@ -81,7 +81,7 @@ import { POSTS } from "./posts/index.js";
   );
 
   let shown = SETTINGS.postsPerPage;
-  let query = "";
+  let query = new URLSearchParams(window.location.search).get("search")?.trim() || "";
 
   /* =====================================================
      3. GENERAL HELPERS
@@ -1252,6 +1252,11 @@ import { POSTS } from "./posts/index.js";
     }
 
     const searchInput = $("#searchInput");
+    if (searchInput && query) {
+      searchInput.value = query;
+      const searchRow = $("#searchRow");
+      if (searchRow) searchRow.hidden = false;
+    }
 
     if (searchInput) {
       searchInput.oninput = event => {

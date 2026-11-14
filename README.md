@@ -1,130 +1,275 @@
-INKWELL JOURNAL - plain HTML, CSS and JavaScript blog (no install, no build)
+# Kabaka's Journal
 
-OPEN IT
-1. Unzip the file.
-2. In VS Code: File > Open Folder > choose the "my-blog" folder.
-3. Double-click i# My Blog
+### Knowledge Today. A Brighter Tomorrow.
 
-### Knowledge, Technology, Creativity, and Life.
+**Kabaka's Journal** is a personal knowledge-sharing and publishing platform created by Ezeikpe Akachukwu Kingsley Kabaka.
 
-Welcome to **My Blog**, a personal knowledge-sharing platform dedicated to learning, teaching, creativity, technology, professional development, and everyday life.
+The journal explores ideas, practical knowledge, professional development and personal experiences across healthcare, technology, education, research, writing and everyday life.
 
-This blog is a space for sharing ideas, practical knowledge, personal insights, educational resources, and experiences across different fields. From healthcare and nursing to software development, writing, and digital innovation, the goal is to make knowledge accessible, encourage continuous learning, and inspire meaningful growth.
+**Visit the website:** https://kabakasjournal.github.io/
 
-## About the Project
+---
 
-My Blog brings together multiple areas of interest in one platform. It is designed for readers who enjoy learning new things, exploring practical solutions, developing professional skills, and discovering fresh perspectives.
+## About the Journal
 
-## Content Categories
+Learning does not end in one profession or discipline. Kabaka's Journal brings together different areas of knowledge in one place, making room for useful explanations, thoughtful discussions, practical lessons and ideas worth exploring.
 
-- **Nursing and Healthcare:** Clinical knowledge, nursing education, patient safety, professional development, and examination preparation.
-- **Coding and Software Development:** Programming tutorials, development projects, technical lessons, and problem-solving.
-- **Writing and Publishing:** Articles, creative writing, books, storytelling, and lessons from the writing process.
-- **Education and Teaching:** Learning resources, simplified explanations, tutorials, and knowledge-sharing.
-- **Technology and Digital Tools:** Software, productivity tools, applications, AI tools, and digital innovation.
-- **Life and Personal Development:** Experiences, reflections, personal growth, lessons learned, and ideas worth sharing.
+The journal documents what I know, what I am learning, what I am building and what I believe may be useful to others.
 
-## Purpose and Vision
+## Topics and Categories
 
-The purpose of this blog is to document learning, share useful knowledge, simplify complex ideas, and create a platform where professional experience, creativity, technology, and everyday life intersect.
+- **Nursing and Healthcare:** Nursing education, clinical knowledge, patient safety, healthcare practice and professional development.
+- **Technology:** Software development, web development, programming, digital tools and practical technology.
+- **Writing and Publishing:** Books, articles, storytelling, creative work and the writing process.
+- **Education and Teaching:** Learning resources, tutorials, simplified explanations and knowledge-sharing.
+- **Research:** Research methods, information analysis and evidence-informed thinking.
+- **Personal Development and Life:** Experiences, reflections, lessons and ideas that encourage growth.
 
-The vision is to build a growing library of practical, informative, and thought-provoking content that helps readers learn, think critically, develop new skills, and approach challenges with greater confidence.
+## Website Features
+
+- Articles covering multiple knowledge areas.
+- Individual pages for published articles.
+- Responsive design for desktop and mobile devices.
+- Article search and navigation.
+- Contact and newsletter features.
+- Social media links.
+- Search-engine-friendly metadata and sitemap.
+- Article generation and publishing utilities.
 
 ## Technology
 
-This repository contains the source code and related resources used to build and maintain the blog.
-
-The technologies used may include:
+Kabaka's Journal is built as a lightweight static website using:
 
 - HTML
 - CSS
 - JavaScript
 - Git and GitHub
-- Additional frameworks, libraries, and tools as the project evolves
+- Node.js and npm for supported development scripts
+- GitHub Pages for website hosting
 
-## Project Status
+The website is designed to remain lightweight, accessible and straightforward to maintain.
 
-The blog is an evolving project. New articles, features, improvements, and content categories may be added over time.
+---
 
-## Contributions and Feedback
+# Project Maintenance Guide
 
-Suggestions, corrections, ideas, and constructive feedback are welcome. The goal is to continually improve the platform, its content, accessibility, and usefulness to readers.
+This section contains practical instructions for working on the website and maintaining its content.
 
-## Author
+## 1. Opening the Project
 
-Created and maintained by **Ezeikpe Akachukwu Kingsley Kabaka**.
+1. Open Visual Studio Code.
+2. Select **File → Open Folder**.
+3. Choose the `My Blog` project folder, the one that directly contains `index.html`.
+4. Confirm that the main folders and files are visible in the Explorer panel.
 
-A learner, writer, healthcare professional, and technology enthusiast committed to continuous learning, creative exploration, and knowledge-sharing.
+Do not open or upload an outer folder that creates an unnecessary nested copy of the website.
 
-## Philosophy
+## 2. Understanding the Project Structure
 
-**Learn continuously. Create meaningfully. Share generously. Grow beyond boundaries.**
-ndex.html to open it in your browser (or use the Live Server extension).
+The project contains the following important areas:
 
-EDIT IT
-- js/config.js  : site name, your name, About text, email, social links, form links
-- js/posts.js   : all your posts. Copy one block, change it, keep the commas.
-- css/style.css : colours are at the very top (the :root section). Change them to restyle everything.
+| File or folder | Purpose |
+|---|---|
+| `index.html` | Main homepage |
+| `privacy.html` | Privacy Policy |
+| `css/` | Website styles and responsive layouts |
+| `js/` | JavaScript functionality and website content |
+| `js/posts/` | Article content modules |
+| `articles/` | Individual published article pages |
+| `images/` | Website photographs and visual assets |
+| `scripts/` | Article generation and other development utilities |
+| `ads.txt` | Advertising publisher declaration |
+| `sitemap.xml` | Search-engine sitemap |
+| `robots.txt` | Search-engine crawling instructions |
 
-FORMS
-Contact and newsletter forms work in demo mode until you paste a Formspree
-link into contactEndpoint and newsletterEndpoint in config.js.
+Some additional files may support particular features, publishing workflows or development tasks.
 
-PUBLISH FREE
-Upload the folder to GitHub Pages, Netlify or Cloudflare Pages.
+Always inspect the current project structure before moving, renaming or deleting files.
 
-YOUR PHOTO
-Copy your picture into the "images" folder and name it kabaka.jpg
-(or change authorPhoto in js/config.js). It appears on the About page.
-Until then a round letter badge is shown.
+## 3. Updating Website Content
 
-RECEIVE CONTACT MESSAGES IN YOUR INBOX (free)
-1. Go to formspree.io and create a free account with your email.
-2. Click New Form, name it "Contact", and confirm your email when asked.
-3. Copy the form link (it looks like https://formspree.io/f/abcdwxyz).
-4. Open js/config.js and paste it between the quotes of contactEndpoint.
-5. Do the same for newsletterEndpoint with a second form named "Newsletter".
-6. Also change the email line in config.js to your real email address.
+The homepage and article system use JavaScript modules to manage website content.
 
-ADD A POST FAST
-Open NEW-POST-TEMPLATE.txt, copy the block into js/posts.js, change the words, save.
+When adding or editing an article:
 
-PUBLISH CHANGES (VS Code + GitHub)
-After setup: edit > Source Control icon > type a message > Commit > Sync Changes.
+1. Locate the appropriate article content module under `js/posts/`.
+2. Follow the structure of existing articles.
+3. Supply the appropriate title, category, publication date, excerpt, tags and article content.
+4. Add an article image where appropriate.
+5. Check that image paths point to files that actually exist.
+6. Run the project's supported article-generation process when necessary.
+7. Inspect the generated article page before publishing.
 
+Do not assume that an article has been published simply because its content has been added to a JavaScript file.
 
-VISUAL UPDATE
-The site now uses local photographs in the images folder. Keep these image files
-when moving or publishing the website:
-- hero-health.jpg
-- nursing.jpg
-- technology.jpg
-- writing.jpg
-- research.jpg
-- education.jpg
-- lifestyle.jpg
+## 4. Managing Article Images
 
-ARTICLE ORGANISATION
-Articles are automatically sorted newest first. Category tiles are generated
-from the categories used in js/posts.js. Topic links are generated from post
-tags. To publish a new article, add a post object to js/posts.js and set its
-category, date, tags, excerpt and content. The site will update its category,
-topic and date listings automatically.
+Website images are stored in the `images/` directory and referenced by the relevant website or article files.
 
-OPTIONAL ARTICLE IMAGE
-To give one article its own photograph, add an image field to that post:
-image: "images/my-photo.jpg",
-Then place my-photo.jpg inside the images folder. If no image field is set,
-the site uses the photograph assigned to that article's category.
+When adding an image:
 
-PUBLISH
-After replacing the files, open the project folder in VS Code, test index.html
-with Live Server, then commit and push your changes to GitHub.
+1. Place it in the appropriate image folder.
+2. Use a descriptive filename.
+3. Reference the correct relative path.
+4. Check that the image loads on both the homepage and its individual article page.
+5. Use appropriately sized and optimized images to avoid unnecessarily slowing down the website.
 
+Preserve existing image assets when transferring, backing up or publishing the project.
 
-IMAGE FIX
-The site uses images/ for its category photographs. Keep index.html, css/, js/, and images/ together at the repository root. Do not upload the outer “My Blog” folder as a nested folder inside the repository. Open the folder that directly contains index.html in VS Code. The article-specific image paths and filenames are listed in ARTICLE-IMAGE-GUIDE.txt. Missing article-specific photos automatically fall back to the relevant category photograph.
+## 5. Editing the Website Design
 
+The primary stylesheet is:
 
-WEBSITE CATEGORIES
-The website categories match the images folders: Education, Lifestyle, Nursing, Research, Technology, and Writing. Code and Tools articles are grouped under Technology; Life articles are grouped under Lifestyle.
+`css/style.css`
+
+This file controls the website's appearance, including:
+
+- Colours and visual themes.
+- Typography.
+- Buttons and interactive elements.
+- Navigation and layout.
+- Article presentation.
+- Responsive behaviour.
+- Spacing, borders and other visual details.
+
+Make design changes carefully and test both desktop and mobile layouts.
+
+## 6. Contact and Newsletter Features
+
+The website includes contact and newsletter functionality.
+
+When changing either feature:
+
+1. Inspect the relevant HTML and JavaScript files.
+2. Verify the configured form endpoint or service.
+3. Test successful form submission.
+4. Test validation and error handling.
+5. Confirm that submissions reach the intended destination.
+
+Do not publish placeholder endpoints or expose private credentials in public source files.
+
+## 7. Article Generation
+
+The project includes an article-generation script:
+
+`scripts/generate-articles.mjs`
+
+This script supports the generation of individual article pages and related website metadata.
+
+Before running it:
+
+1. Review the current script and its expected input structure.
+2. Confirm that the source article content is correct.
+3. Ensure that required images and assets exist.
+4. Back up important changes when appropriate.
+5. Run the generation process using the project's configured development workflow.
+6. Review generated pages, metadata and sitemap output.
+
+Avoid editing generated files manually when the same change should be made in the source content or generator. Otherwise, a later regeneration may overwrite the manual changes.
+
+## 8. Search Engine Optimisation
+
+The website includes search-engine-related features such as:
+
+- Page titles and descriptions.
+- Canonical URLs.
+- Open Graph and social sharing metadata.
+- Article-specific pages.
+- `sitemap.xml`.
+- `robots.txt`.
+
+When adding pages or changing URLs:
+
+1. Check that the canonical URL uses the correct website domain.
+2. Update sitemap entries where necessary.
+3. Verify that internal links work.
+4. Check that images have meaningful alternative text.
+5. Avoid duplicate or conflicting metadata.
+
+The production website is:
+
+https://kabakasjournal.github.io/
+
+## 9. Google AdSense
+
+The website uses Google AdSense for advertising monetisation.
+
+The relevant files include:
+
+- `ads.txt`
+- Homepage and article HTML files.
+- The article-generation script.
+- AdSense publisher and ad-unit configuration.
+
+When making advertising changes:
+
+1. Preserve the correct AdSense publisher ID.
+2. Ensure that the AdSense loader is included only once per page.
+3. Verify that each intended advertising placement has the correct ad-unit configuration.
+4. Ensure that generated article pages retain the advertising configuration.
+5. Check the public `ads.txt` file.
+
+The public advertising declaration should be available at:
+
+https://kabakasjournal.github.io/ads.txt
+
+Do not add duplicate scripts or ad placements when updating existing pages.
+
+## 10. Testing Before Publishing
+
+Before publishing changes:
+
+- Open `index.html` in a browser or use an appropriate local development server.
+- Check the homepage and navigation.
+- Test article links and search.
+- Test contact and newsletter forms.
+- Check article images.
+- Inspect the Privacy Policy.
+- Check responsive layouts on desktop and mobile.
+- Verify that generated pages are correct.
+- Review browser developer-console errors.
+- Confirm that no unintended files or backups are included in the publishing changes.
+
+## 11. Publishing Through GitHub
+
+The website is hosted using GitHub Pages.
+
+A typical Git publishing workflow is:
+
+```powershell
+git status
+git diff
+git add .
+git commit -m "Describe the website updates"
+git push origin main
+```
+
+**Important:** Review the output of `git status` and `git diff` before staging files. Do not automatically add backup files, temporary scripts, credentials or unrelated project files.
+
+After pushing, allow GitHub Pages to complete deployment and inspect the live website.
+
+## 12. Backups and Project Safety
+
+Keep backups of important project files before substantial changes.
+
+However, do not treat backup copies as active website source files. Avoid accidentally publishing backup folders or temporary development files.
+
+Maintain a clear distinction between:
+
+- Active website files.
+- Source content.
+- Generated article pages.
+- Development utilities.
+- Temporary files and backups.
+
+---
+
+## Contact
+
+For questions, feedback, collaborations or contributions, please use the contact section on the website.
+
+**Website:** https://kabakasjournal.github.io/
+
+---
+
+(c) Ezeikpe Akachukwu Kingsley (Kabaka). All rights reserved.
